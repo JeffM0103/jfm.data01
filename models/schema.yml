@@ -7,3 +7,4 @@ sources:
     tables:
       - name: RestauParis_clean_V2
       - name : INSEE_etablissement
+      - name : testbapt5
