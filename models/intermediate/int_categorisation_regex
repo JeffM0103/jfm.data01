@@ -1,0 +1,41 @@
+with base as (
+    select *,
+      array_to_string(
+        array(
+          select x from unnest([
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'asia') then 'Restaurant asiatique' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'couscous|tagine') then 'Restaurant marocain' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'français|corse|savoyard|sud ouest|alsac') then 'Restaurant français' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'fruit de mer|fruits de la mer|de la mer') then 'Restaurant de fruits de mer' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'mexicain|mexique') then 'Restaurant mexicain' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'itali') then 'Restaurant italien' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'mauric|antill|martiniqu') then 'Restaurant créole' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'méditerr') then 'Restaurant méditerranéen' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'espagn') then 'Restaurant espagnol' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'sushi|ramen|jap') then 'Restaurant japonais' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'sri lanka|bengla|indien|indian') then 'Restaurant indien' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'américain|hamburger') then 'Restaurant à hamburgers' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'turc|turk') then 'Restaurant turc' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'argentin') then 'Restaurant argentin' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'thai|thaï') then 'Restaurant thai' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'chine|chinois|hot pot|kong') then 'Restaurant chinois' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'tunis') then 'Restaurant tunisien' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'coréen|korean') then 'Restaurant coréen' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'poke|bowl|hawa') then 'Restaurant hawaien' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'kebab|döner') then 'Kebab' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'grec') then 'Restaurant grec' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'bagel') then 'Restaurant à bagel' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'colombi|péru|cuba') then 'Restaurant latino américain' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'brésil|brazil') then 'Restaurant brésilien' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'éthiopi') then 'Restaurant éthiopien' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'liban') then 'Restaurant libanais' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'crêperie') then 'Crêperie' end,
+            case when regexp_contains(lower(coalesce(description,'') || coalesce(type_principal,'') || coalesce(tous_les_types,'')), r'viet|viêt') then 'Restaurant vietnamien' end
+          ]) x
+          where x is not null
+        ), ', '
+      ) as new_cat_from_description
+    from source
+)
+
+select * from base
