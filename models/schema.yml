@@ -5,6 +5,6 @@ version: 2
 sources:
   - name: RESTAUPARIS
     tables:
-      - name: RestauParis_clean_V2
       - name : INSEE_etablissement
       - name : testbapt5
+      - name : RestauParis_new_cat5
