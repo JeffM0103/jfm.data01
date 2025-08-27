@@ -1,0 +1,9 @@
+
+
+version: 2
+
+sources:
+  - name: RESTAUPARIS
+    tables:
+      - name: RestauParis_clean_V2
+      - name : INSEE_etablissement
