@@ -8,3 +8,4 @@ sources:
       - name : INSEE_etablissement
       - name : testbapt5
       - name : RestauParis_new_cat5
+      - name: cat_restau_abdellah
