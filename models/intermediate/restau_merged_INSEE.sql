@@ -113,4 +113,3 @@ select
     i.employeur
 from {{ ref("prep_PK") }} as r
 left join {{ ref("stg_RESTAUPARIS__INSEE_etablissement") }} as i using (PK)
-where actif is not null
