@@ -21,7 +21,7 @@ renamed as (
             end),
             r'[^a-zA-Z0-9 ]', '')
         as nom,
-        datecreationetablissement
+        datecreationunitelegale
         as date_creation,
         case
         when etatadministratifunitelegale = 'A' then true
