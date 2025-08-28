@@ -6,7 +6,7 @@ SELECT
     Geometry_X_Y  as geoloc_quartier,
     q.L_QU AS quartier
 FROM {{ ref('restau_merged_INSEE') }} r
-JOIN restauparis.RESTAUPARIS.QuartiersParis q
+JOIN {{ ref('stg_RESTAUPARIS__QuartiersParis') }} q
   ON ST_CONTAINS(
     ST_GEOGFROMGEOJSON(q.Geometry),
     ST_GEOGPOINT(r.longitude, r.latitude)
