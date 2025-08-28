@@ -1,5 +1,6 @@
 SELECT
 r.*,
+i.pk as nom_adresse,
 i.restauration_rapide,
 i.cuisine_fusion,
 i.brasserie,
