@@ -26,6 +26,7 @@ Lien_maps,
   -- 🌐 SERVICE OPTIONS
   JSON_VALUE(Caracteristiques, '$.service-options.delivery') = 'offers-delivery' AS has_delivery,
   JSON_VALUE(Caracteristiques, '$.service-options.takeout') = 'offers-takeout' AS has_takeout,
+  JSON_VALUE(Caracteristiques, '$.service-options.outdoor-seating') = 'has-outdoor-seating' AS has_terrasse,
 
   -- 🥂 HIGHLIGHTS
   JSON_VALUE(Caracteristiques, '$.highlights.rooftop-seating') = 'has-rooftop-seating' AS has_rooftop_seating,
