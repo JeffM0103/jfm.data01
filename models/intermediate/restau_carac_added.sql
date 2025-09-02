@@ -2,7 +2,7 @@ SELECT
     INITCAP(
             REGEXP_REPLACE(
                 TRANSLATE(
-                    nom,
+                    lower(nom),
                     'àâäáãåçèéêëìíîïñòóôöõùúûüýÿÀÂÄÁÃÅÇÈÉÊËÌÍÎÏÑÒÓÔÖÕÙÚÛÜÝ',
                     'aaaaaaceeeeiiiinooooouuuuyyAAAAAACEEEEIIIINOOOOOUUUUY'
                 ),
@@ -73,4 +73,4 @@ Lien_maps,
   JSON_VALUE(Caracteristiques, '$.planning.accepts-reservations') = 'accepts-reservations' AS accepts_reservations
   
 FROM {{ ref('restau_cate_valide_2') }}
--- where nom like '%bouillon%'
+--where nom like '%bouillon%'
