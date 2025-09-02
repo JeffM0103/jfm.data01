@@ -29,4 +29,4 @@ SELECT
         )
     ) AS PK
 FROM {{ ref('restau_merged_jeff_bapt') }}
-where nom like '%nouvelle seine%'
+-- where nom like '%nouvelle seine%'
