@@ -1,5 +1,14 @@
 SELECT
-    *,
+    INITCAP(
+            REGEXP_REPLACE(
+                TRANSLATE(
+                    nom,
+                    'àâäáãåçèéêëìíîïñòóôöõùúûüýÿÀÂÄÁÃÅÇÈÉÊËÌÍÎÏÑÒÓÔÖÕÙÚÛÜÝ',
+                    'aaaaaaceeeeiiiinooooouuuuyyAAAAAACEEEEIIIINOOOOOUUUUY'
+                ),
+                r'[^a-zA-Z0-9 ]', ' '                     -- supprime caractères spéciaux
+            )
+        ) as nom,
     CONCAT(
         INITCAP(
             REGEXP_REPLACE(
@@ -27,6 +36,7 @@ SELECT
                 r'place |pl\. ', 'pl'
             )
         )
-    ) AS PK
+    ) AS PK,
+* EXCEPT (nom)
 FROM {{ ref('restau_merged_jeff_bapt') }}
--- where nom like '%nouvelle seine%'
+-- where nom like '%bouillon%'

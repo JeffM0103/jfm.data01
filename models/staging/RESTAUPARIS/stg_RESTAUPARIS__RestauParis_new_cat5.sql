@@ -9,7 +9,16 @@ source as (
 renamed as (
 
     select
-        lower(regexp_replace(Nom, r'[^a-zA-Z0-9\s]', '')) as nom,
+            INITCAP(
+            REGEXP_REPLACE(
+                TRANSLATE(
+                    Nom,
+                    'àâäáãåçèéêëìíîïñòóôöõùúûüýÿÀÂÄÁÃÅÇÈÉÊËÌÍÎÏÑÒÓÔÖÕÙÚÛÜÝ',
+                    'aaaaaaceeeeiiiinooooouuuuyyAAAAAACEEEEIIIINOOOOOUUUUY'
+                ),
+                r'[^a-zA-Z0-9 ]', ' '                     -- supprime caractères spéciaux
+            )
+        ) as nom,
         lower(description) as description,
         ouvert,
         type_principal,
@@ -48,3 +57,4 @@ renamed as (
 )
 
 select * from renamed
+where Nom like '%Bouillon%'

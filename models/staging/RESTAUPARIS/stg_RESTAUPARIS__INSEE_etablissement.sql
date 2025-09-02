@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+    *,
         INITCAP(
             REGEXP_REPLACE(
                 REGEXP_REPLACE(
@@ -35,7 +36,7 @@ renamed as (
         when etatadministratifunitelegale = 'C' then false
         else null
         end as actif,
-        lower(
+        INITCAP(lower(
             concat(
                 numerovoieetablissement,
                 ' ',
@@ -55,7 +56,7 @@ renamed as (
                 ' ',
                 libellevoieetablissement
             )
-        ) as adresse_1,
+        )) as adresse_1,
         codepostaletablissement
         as code_postal,
         CASE 
@@ -69,3 +70,4 @@ renamed as (
 select
 concat (nom,' - ',adresse_1) as PK,
 * from renamed
+-- where nom like '%Bouillon%'

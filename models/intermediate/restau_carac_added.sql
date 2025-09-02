@@ -1,5 +1,14 @@
 SELECT
-nom,
+    INITCAP(
+            REGEXP_REPLACE(
+                TRANSLATE(
+                    nom,
+                    'àâäáãåçèéêëìíîïñòóôöõùúûüýÿÀÂÄÁÃÅÇÈÉÊËÌÍÎÏÑÒÓÔÖÕÙÚÛÜÝ',
+                    'aaaaaaceeeeiiiinooooouuuuyyAAAAAACEEEEIIIINOOOOOUUUUY'
+                ),
+                r'[^a-zA-Z0-9 ]', ' '                     -- supprime caractères spéciaux
+            )
+        ) as nom,
 description,
 ouvert,
 col1_filled_3 as type,
@@ -64,3 +73,4 @@ Lien_maps,
   JSON_VALUE(Caracteristiques, '$.planning.accepts-reservations') = 'accepts-reservations' AS accepts_reservations
   
 FROM {{ ref('restau_cate_valide_2') }}
+-- where nom like '%bouillon%'
