@@ -9,18 +9,25 @@ source as (
 renamed as (
 
     select
-        regexp_replace(
-            lower(
-            case 
-                when enseigne1Etablissement is null then 
-                    regexp_replace(lower(denominationusuelle1unitelegale), 'soc |sas |societe|sarl', '')
-                when coalesce(denominationunitelegale, denominationusuelle1unitelegale) is null then 
-                    regexp_replace(lower(denominationunitelegale), 'soc |sas |societe|sarl', '')
-                else 
-                    regexp_replace(lower(enseigne1Etablissement), 'soc |sas |societe|sarl', '')
-            end),
-            r'[^a-zA-Z0-9 ]', '')
-        as nom,
+        INITCAP(
+            REGEXP_REPLACE(
+                REGEXP_REPLACE(
+                TRANSLATE(
+                    LOWER(
+                    CASE
+                        WHEN enseigne1Etablissement IS NULL THEN COALESCE(denominationusuelle1unitelegale, denominationunitelegale)
+                        WHEN COALESCE(denominationunitelegale, denominationusuelle1unitelegale) IS NULL THEN denominationusuelle1unitelegale
+                        ELSE enseigne1Etablissement
+                    END
+                    ),
+                    'àâäáãçèéêëìíîïñòóôöõùúûüýÿÀÂÄÁÃÅÇÈÉÊËÌÍÎÏÑÒÓÔÖÕÙÚÛÜÝ',
+                    'aaaaaceeeeiiiinooooouuuuyyAAAAAACEEEEIIIINOOOOOUUUUY'
+                ),
+                r'\b(soc|sas|societe|sarl)\b', ''   -- supprime les mots juridiques
+                ),
+                r'[^a-zA-Z0-9 ]', ''                  -- supprime caractères spéciaux
+            )
+            ) AS nom,
         datecreationunitelegale
         as date_creation,
         case
