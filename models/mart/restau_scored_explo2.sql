@@ -46,7 +46,7 @@ WITH restau_quartier AS (
   -- Score final valorisant réussite en zone concurrentielle
   ROUND((0.5 * popularite + 0.4 * satisfaction + 0.1 * visibilite) * (1+0.05*(0.5*concurrence_quartier + 1.5*concurrence_type_cuisine)/2), 4) AS score_reussite
   FROM score
---where nom_adresse like "%pink mamma%" OR nom_adresse like "%crmaillre%" OR nom_adresse like'%vege brancion%' OR nom_adresse like "%bouillon chartier%" or nom_adresse like '%alan turing%' or nom_adresse like "%chez lu%"
+where nom_adresse like "%pink mamma%" OR nom_adresse like "%crmaillre%" OR nom_adresse like'%vege brancion%' OR nom_adresse like '%Bouillon%' or nom_adresse like '%alan turing%' or nom_adresse like "%chez lu%"
   order by score_reussite desc
  -- limit 100
 

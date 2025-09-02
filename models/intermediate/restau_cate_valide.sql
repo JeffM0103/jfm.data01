@@ -1,5 +1,6 @@
 WITH temp AS(
-SELECT *,
+SELECT 
+*,
   CASE 
     WHEN LOWER(TRIM(col1_filled_2)) IN ('restaurant ouzbek', 'restaurant cambodgien', 'restaurant malaisien', 'restaurant taïwanais', 'restaurant indonésien','restaurant de cuisine fusion asiatique' ) THEN 'Restaurant asiatique'
     WHEN LOWER(TRIM(col1_filled_2)) IN (
@@ -21,8 +22,9 @@ SELECT *,
     
     ELSE col1_filled_2
   END AS col1_filled_3
-FROM `restauparis.dbt_bviu.restau_remplace_2` 
+FROM {{ ref('restau_remplace_2') }}
 )
 
 SELECT *
 FROM temp
+-- where nom like '%ouillon%'

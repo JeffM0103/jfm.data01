@@ -24,4 +24,4 @@ SELECT
 FROM {{ ref('restau_carac_added') }} AS r
 LEFT JOIN {{ ref('restau_merged_quartier') }} AS i
     ON LOWER(r.adresse_complete) = LOWER(i.adresse_complete)
--- WHERE r.nom LIKE '%nouvelle seine%'
+-- WHERE r.nom LIKE '%Bouillon%'
